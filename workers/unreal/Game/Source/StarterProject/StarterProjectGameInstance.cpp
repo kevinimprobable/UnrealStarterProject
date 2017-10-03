@@ -1,10 +1,11 @@
 // Copyright (c) Improbable Worlds Ltd, All Rights Reserved
 
+#include "StarterProjectGameInstance.h"
 #include "StarterProject.h"
 
 #include "StarterProjectGameInstance.h"
 #include "EntityRegistry.h"
-#include "Improbable/Generated/cpp/unreal/EntityPipeline.h"
+#include "EntityPipeline.h"
 #include "SimpleEntitySpawnerBlock.h"
 #include "SpatialOS.h"
 

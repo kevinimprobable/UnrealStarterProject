@@ -1,6 +1,7 @@
 {
   "build": {
-    "tasks_filename": "Game/spatialos.unreal.worker.build.json"
+    "tasks_filename": "Game/Intermediate/Improbable/spatialos.unreal.worker.build.json",
+    "generated_build_scripts_type": "unreal"
   },
   "bridge": {
     "worker_attribute_set": {
@@ -21,9 +22,19 @@
   },
   "managed": {
     "windows": {
-      "artifact_name": "UnrealWorker@Windows.zip",
-      "command": "StarterProject/Binaries/Win64/StarterProjectServer.exe",
+      "artifact_name": "UnrealEditor@Windows.zip",
+      "command": "StartServer.bat",
       "arguments": [
+        "-server",
+        "-stdout",
+        "-nowrite",
+        "-unattended",
+        "-nologtimes",
+        "-nopause",
+        "-messaging",
+        "-SaveToUserDir",
+        "+workerType",
+        "UnrealWorker",
         "+appName",
         "${IMPROBABLE_PROJECT_NAME}",
         "+receptionistIp",
@@ -43,7 +54,8 @@
       "artifact_name": "UnrealWorker@Linux.zip",
       "command": "StartServer.sh",
       "arguments": [
-        "StarterProjectServer",
+        "${IMPROBABLE_WORKER_ID}",
+        "StarterProject",
         "+appName",
         "${IMPROBABLE_PROJECT_NAME}",
         "+receptionistIp",
@@ -62,14 +74,22 @@
   },
   "external": {
     "default": {
-      "run_type": "EXECUTABLE_ZIP",
+      "run_type": "EXECUTABLE",
       "windows": {
-        "artifact_name": "UnrealWorker@Windows.zip",
-        "command": "StarterProject/Binaries/Win64/StarterProjectServer.exe",
+        "command": "${UNREAL_HOME}\\Engine\\Binaries\\Win64\\UE4Editor.exe",
         "arguments": [
+          "${IMPROBABLE_WORKER_DIR}/Game/<PROJECT_NAME>.uproject",
+          "-server",
+          "-stdout",
+          "-nowrite",
+          "-unattended",
+          "-nologtimes",
+          "-nopause",
+          "-messaging",
+          "-SaveToUserDir",
           "+workerType",
           "UnrealWorker",
-          "log=unrealWorker.log"
+          "log=UnrealWorker.log"
         ]
       }
     }

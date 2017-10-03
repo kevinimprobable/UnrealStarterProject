@@ -2,7 +2,7 @@
 #pragma once
 
 #include "EntityId.h"
-#include "Improbable/Generated/cpp/unreal/EntityTemplate.h"
+#include "EntityTemplate.h"
 #include "SpatialOS.h"
 #include "StarterProjectGameMode.generated.h"
 
@@ -55,9 +55,6 @@ class AStarterProjectGameMode : public AGameModeBase
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, NoClear)
 	bool UseExternalIp;
-	
-	UFUNCTION(BlueprintCallable, Category = "Entity")
-	static FEntityId GetEntityId(const AActor* Actor);
 
   private:
     DECLARE_DELEGATE(FUnbindDelegate);

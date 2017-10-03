@@ -1,5 +1,7 @@
 // Copyright (c) Improbable Worlds Ltd, All Rights Reserved
 
+#include "StarterProjectGameMode.h"
+
 #include "StarterProject.h"
 #include "EntityBuilder.h"
 #include "StarterProjectGameInstance.h"
@@ -9,7 +11,8 @@
 #include "WorkerConnection.h"
 #include "improbable/standard_library.h"
 #include <improbable/player/heartbeat.h>
-#include "Improbable/Generated/cpp/unreal/Commander.h"
+#include "Commander.h"
+#include "EntityRegistry.h"
 
 #define ENTITY_BLUEPRINTS_FOLDER "/Game/EntityBlueprints"
 
@@ -149,7 +152,7 @@ void AStarterProjectGameMode::StartPlay()
             this, &AStarterProjectGameMode::OnSpatialOsFailedToConnect);
         SpatialOS->OnDisconnectedDelegate.AddDynamic(this,
                                                      &AStarterProjectGameMode::OnSpatialOsDisconnected);
-        UE_LOG(LogSpatialOS, Display, TEXT("Startplay called to SpatialOS"))
+        UE_LOG(LogStarterProject, Display, TEXT("Startplay called to SpatialOS"))
 
         auto workerConfig = FSOSWorkerConfigurationData();
 
@@ -253,21 +256,4 @@ USpatialOS* AStarterProjectGameMode::GetSpatialOS() const
     }
 
     return nullptr;
-}
-
-
-FEntityId AStarterProjectGameMode::GetEntityId(const AActor* Actor)
-{
-	auto GameInstance = Cast<UStarterProjectGameInstance>(Actor->GetWorld()->GetGameInstance());
-
-	if (GameInstance != nullptr)
-	{
-		auto EntitySpawner = GameInstance->GetEntityRegistry();
-		if (EntitySpawner != nullptr)
-		{
-			auto entityId = FEntityId(EntitySpawner->GetEntityIdFromActor(Actor));
-			return entityId;
-		}
-	}
-	return FEntityId();
 }

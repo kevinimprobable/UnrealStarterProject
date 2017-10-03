@@ -7,12 +7,17 @@ using System.IO;
 
 public class StarterProject : ModuleRules
 {
+#if !WITH_FORWARDED_MODULE_RULES_CTOR
+	// Backwards compatibility with Unreal 4.15
 	public StarterProject(TargetInfo Target)
+#else
+	// Unreal 4.16+
+	public StarterProject(ReadOnlyTargetRules Target) : base(Target)
+#endif
 	{
-        var SpatialOS = new SpatialOSModule(this, Target, this.GetType().Name);
-		SpatialOS.SetupSpatialOS();
-		SpatialOS.GenerateCode();
+        PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+				bFasterWithoutUnity = true;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "SpatialOS"});
 	}
 }

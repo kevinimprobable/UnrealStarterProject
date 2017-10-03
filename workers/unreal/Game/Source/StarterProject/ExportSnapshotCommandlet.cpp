@@ -1,5 +1,6 @@
 // Copyright (c) Improbable Worlds Ltd, All Rights Reserved
 
+#include "ExportSnapshotCommandlet.h"
 #include "StarterProject.h"
 
 #include "EntityBuilder.h"
@@ -7,10 +8,14 @@
 #include "improbable/collections.h"
 #include "improbable/standard_library.h"
 #include <improbable/spawner/spawner.h>
+#include <improbable/player/heartbeat.h>
 #include <improbable/worker.h>
 #include <array>
 
 using namespace improbable;
+
+using Components =
+    worker::Components<spawner::Spawner, Persistence, EntityAcl, Position, player::HeartbeatSender, player::HeartbeatReceiver>;
 
 const int g_SpawnerEntityId = 1;
 
@@ -46,7 +51,7 @@ void UExportSnapshotCommandlet::GenerateSnapshot(const FString& savePath) const
     std::unordered_map<worker::EntityId, worker::Entity> snapshotEntities;
     snapshotEntities.emplace(std::make_pair(g_SpawnerEntityId, CreateSpawnerEntity()));
     worker::Option<std::string> Result =
-        worker::SaveSnapshot(TCHAR_TO_UTF8(*fullPath), snapshotEntities);
+        worker::SaveSnapshot(Components{}, TCHAR_TO_UTF8(*fullPath), snapshotEntities);
     if (!Result.empty())
     {
         std::string ErrorString = Result.value_or("");
