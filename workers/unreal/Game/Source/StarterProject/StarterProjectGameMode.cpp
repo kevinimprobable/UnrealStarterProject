@@ -200,7 +200,7 @@ void AStarterProjectGameMode::Tick(float DeltaTime)
 
     if (GameInstance != nullptr)
     {
-        GameInstance->ProcessOps();
+        GameInstance->ProcessOps(DeltaTime);
     }
 }
 
