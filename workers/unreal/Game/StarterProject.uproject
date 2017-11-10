@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{B830F5C6-459B-B697-1E2E-979EF1600B09}",
+	"EngineAssociation": "{C5728A59-4D78-A228-D7CF-5EB0F8F43F4F}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -12,6 +12,11 @@
 				"AIModule",
 				"Engine"
 			]
+		},
+		{
+			"Name": "SpatialOS",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"PostBuildSteps":
