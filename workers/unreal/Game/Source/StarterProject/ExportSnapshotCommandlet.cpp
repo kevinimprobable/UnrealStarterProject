@@ -15,7 +15,7 @@
 using namespace improbable;
 
 using Components =
-    worker::Components<spawner::Spawner, Persistence, EntityAcl, Position, player::HeartbeatSender, player::HeartbeatReceiver>;
+    worker::Components<spawner::Spawner, Persistence, EntityAcl, Position, Metadata, player::HeartbeatSender, player::HeartbeatReceiver>;
 
 const int g_SpawnerEntityId = 1;
 
