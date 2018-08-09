@@ -31,7 +31,6 @@
         "-nologtimes",
         "-nopause",
         "-messaging",
-        "-SaveToUserDir",
         "+workerType",
         "UnrealWorker",
         "+appName",
@@ -46,7 +45,7 @@
         "${IMPROBABLE_WORKER_ID}",
         "+linkProtocol",
         "RakNet",
-        "log=${IMPROBABLE_LOG_FILE}"
+        "-abslog=${IMPROBABLE_LOG_FILE}"
       ]
     },
     "linux": {
@@ -67,7 +66,7 @@
         "${IMPROBABLE_WORKER_ID}",
         "+linkProtocol",
         "RakNet",
-        "log=${IMPROBABLE_LOG_FILE}"
+        "-abslog=${IMPROBABLE_LOG_FILE}"
       ]
     }
   },
@@ -85,10 +84,9 @@
           "-nologtimes",
           "-nopause",
           "-messaging",
-          "-SaveToUserDir",
           "+workerType",
           "UnrealWorker",
-          "log=UnrealWorker.log"
+          "-abslog=${IMPROBABLE_LOG_FILE}"
         ]
       }
     }
